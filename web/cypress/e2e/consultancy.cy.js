@@ -24,6 +24,46 @@ describe('Formulaario de Consultoria', () => {
             .find('select')
             .select('Individual')
 
+
+        // Clicar no radio usando path
+        // //span[text()="Pessoa Fisica"]/..///input *caminho xpaf
+
+        cy.contains('label', 'Pessoa Física')
+            .find('input')
+            .click()
+            .should('be.checked')
+        //.click() ou check
+
+        cy.contains('label', 'Pessoa Jurídica')
+            .find('input')
+            .should('be.not.checked')
+
+        cy.contains('label', 'CPF')
+            .parent()
+            .find('input')
+            .type('28965266092')
+            .should('have.value', '289.652.660-92')
+
+        // clicar em varios checks juntos
+        const discoveryChannels = [
+            'Instagram',
+            'LinkedIn',
+            'Udemy',
+            'YouTube',
+            'Indicação de Amigo'
+        ]
+        //vai percorrer a lista de discovery pra validar
+        discoveryChannels.forEach((channel) => {
+            cy.contains('label', channel)
+                .find('input')
+                .check()
+                .should('be.checked')
+        })
+
+
+
+
+
     });
 });
 
