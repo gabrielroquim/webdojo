@@ -1,10 +1,16 @@
 describe('Formulaario de Consultoria', () => {
 
-    it.only('Deve solicitar consultoria individual', () => {
+    before(() =>{
+        cy.log('Isso acontece antes de todos os testes uma única vez')
+    } )
+    beforeEach(() => {
         cy.start()
         cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
         cy.goTo('Formulários', 'Consultoria')
+    })
+
+    it('Deve solicitar consultoria individual', () => {
 
         //Quando não tiver ID use placeholder e o campo for tipo/type texto
         cy.get('input[placeholder="Digite seu nome completo"]').type('Gabriel Roquim')
@@ -103,11 +109,6 @@ describe('Formulaario de Consultoria', () => {
 
     it('Deve verificar os campos obrigatórios', () => {
 
-        cy.start()
-        cy.submitLoginForm('papito@webdojo.com', 'katana123')
-
-        cy.goTo('Formulários', 'Consultoria')
-
         cy.contains('button', 'Enviar formulário')
             .click()
 
@@ -135,6 +136,9 @@ describe('Formulaario de Consultoria', () => {
             .and('have.class', 'text-red-400')
             .and('have.css', 'color', 'rgb(248, 113, 113)')
 
+    });
+    beforeEach(() => {
+        cy.log('Isso acontece depois de todos os testes uma única vez')
     });
 });
 

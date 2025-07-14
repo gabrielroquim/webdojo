@@ -6,6 +6,7 @@ module.exports = defineConfig({
 
     },
     experimentalStudio: true,
+    video: true
     
   }
 });
